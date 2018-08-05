@@ -1,4 +1,4 @@
-var width = 1000, height = 700;
+var width = 1000, height = 680;
 var max_power = 100;
 
 var mouse = {x:0, y:0, isMouseDown: false, id: -1}
@@ -262,11 +262,11 @@ function slow() {
   fps = 10000 / 40;
 }
 
-function fast() {
+function medium() {
   fps = 1000 / 40;
 }
 
-function super_fast() {
+function fast() {
   fps = 1 / 1000;
 }
 
