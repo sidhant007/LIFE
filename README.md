@@ -1,5 +1,7 @@
 # LIFE
 
+Live demo can be seen [HERE] (https://cdn.rawgit.com/sidhant007/LIFE/4a9c85ea/index.html)
+
 - Designing and implementing a variant of genetic algorithm(NEAT, or Neuro-Evolution of Augmenting Topologies) for a life simulation involving a basic organism which ages and requires food
 - Problem Statement - To design a simulation in which agents are able to navigate in a 2d world so as to maximize their lifetime. Their lifetime is essentially defined by how much food they are able to eat while moving through the map and how many times can they avoid danger zones which drain their energy.
   - Each agent is depicted by a small yellow circle.
@@ -23,6 +25,7 @@
   - The cross - breeding and mutation primarily happens on the basic level of mixing 2 neural networks belonging to different agents. This is done by swapping weights of the neural nets.
   - The distribution broadly refers to the odds of a certain agent of the parent generation being selected to generate an offspring. The intuition is that if an agents performs good, then that agent is more likely to have contribution in the next generation of agents as compared to an agents which had a shorter lifespan.
   - We keep on running these iterations of genetic algorithm to improvise our results.
-- Current Benchmarks -
-    [WIP]
+- Current UI -
+  - Can click on an agent to see the agents perspective of food items and the relevant information that the node knows (i.e distance to which food particles and danger zones in the respective 4 rotated quadrants)
+  - There is a line graph being polotted real time to give the user the idea of how the genetic algorithm is improving over the generations. (Used Google Library to draw the line graph)
 - This project was done mainly after reading about genetic algorithms and neural networks through online courses and blogs. The simulation itslef works and the agents gradually improve their scores but I cannot mathematically reason out as to why it works due to insufficient theoretical knowledge about genetic algorithms.
