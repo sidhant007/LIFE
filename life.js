@@ -475,5 +475,6 @@ function newLife() {
   var f = parseInt(document.getElementById('food_no').value)
   var a = parseInt(document.getElementById('food_energy').value)
   var d = parseInt(document.getElementById('danger_no').value)
+  document.getElementById("submit_btn").disabled = true
   setup(k, f, a, d);
 }
