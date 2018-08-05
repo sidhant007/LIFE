@@ -194,13 +194,13 @@ function individual(my_net) {
       }
     }
     for(var i = 0; i < dangers.length; i++) {
-       var dis_bw = (1/dist(this, dangers[i])) * 100;
-       var quad_in = quadrant(this, dangers[i]);
-       if(my_input.mat[quad_in + 4][0] < dist_bw) {
-         my_input.mat[quad_in + 4][0] = dist_bw;
-         this.coordx[quad_in + 4] = dangers[i].x;
-         this.coordy[quad_in + 4] = dangers[i].y;
-       }
+      var dis_bw = (1/dist(this, dangers[i])) * 100;
+      var quad_in = quadrant(this, dangers[i]);
+      if(my_input.mat[quad_in + 4][0] < dist_bw) {
+        my_input.mat[quad_in + 4][0] = dist_bw;
+        this.coordx[quad_in + 4] = dangers[i].x;
+        this.coordy[quad_in + 4] = dangers[i].y;
+      }
     }
     my_input.mat[8][0] = this.x / width;
     my_input.mat[9][0] = this.y / height;
@@ -229,7 +229,7 @@ function individual(my_net) {
     /*
        this.x = this.x + (Math.random() * 5);
        this.y = this.y + (Math.random() * 5);
-     */
+       */
 
     for(var i = 0; i < foods.length; i++) {
       if(dist(this, foods[i]) < 2*foods[i].radius && this.eaten[i] == false) {
@@ -256,26 +256,27 @@ function individual(my_net) {
   }
 }
 
-var fps = 1000 / 40;
+var fps = 20;
 
 function slow() {
-  fps = 10000 / 40;
+  fps = 100
 }
 
 function medium() {
-  fps = 1000 / 40;
+  fps = 20
 }
 
 function fast() {
-  fps = 1 / 1000;
+  fps = 1
 }
 
 function get_best() {
   // document.getElementById("best_net").innerHTML = JSON.stringify(best_net, null, 2);
-  document.getElementById("best_score").innerHTML = bestFitness;
+  document.getElementById("best_score").innerHTML = "Best score = " + bestFitness;
+  document.getElementById("no_of_gen").innerHTML = "Current Generation No. = " + genNo;
 }
 
-var setup = function() {
+var setup = function(k, f, a, d) {
   canvas = document.getElementById("myCanvas");
   ctx = canvas.getContext("2d");
 
@@ -299,30 +300,30 @@ var setup = function() {
     }
   }
 
-  // Create 10 random dangers.
-  for(var i = 0; i < 10; i++) {
+  // Create d random dangers.
+  for(var i = 0; i < d; i++) {
     dangers.push(new danger(Math.random() * width, Math.random() * height,
-          50, 5));
+      50, 5));
   }
 
-  // Create 30 random food points.
-  for(var i = 0; i < 30; i++) {
-    foods.push(new food(Math.random() * width, Math.random() * height, 20));
+  // Create f random food points.
+  for(var i = 0; i < f; i++) {
+    foods.push(new food(Math.random() * width, Math.random() * height, a));
   }
 
-  // Create 20 random individuals.
-  for(var i = 0; i < 20; i++) {
+  // Create k random individuals.
+  for(var i = 0; i < k; i++) {
     indis.push(new individual(new neural_net()));
   }
 
   loop();
 }
 
-var counter = 0;
+var genNo= 0;
 var best_net, bestFitness;
 
 function evolve() {
-  counter++;
+  genNo++;
   var nextGen = [];
   var prob = [];
   var prefix_prob = [];
@@ -390,7 +391,7 @@ function printMap() {
   for(var i = 0; i < indis.length; i++) {
     ctx.fillStyle = "yellow";
     ctx.globalAlpha = Math.min(1, indis[i].power / max_power)
-      ctx.beginPath();
+    ctx.beginPath();
     ctx.arc(indis[i].x, indis[i].y, indis[i].radius, 0, 2*Math.PI, true);
     ctx.fill();
     ctx.closePath();
@@ -469,4 +470,10 @@ var loop = function() {
   window.setTimeout(loop, fps);
 }
 
-setup();
+function newLife() {
+  var k = parseInt(document.getElementById('agent_no').value)
+  var f = parseInt(document.getElementById('food_no').value)
+  var a = parseInt(document.getElementById('food_energy').value)
+  var d = parseInt(document.getElementById('danger_no').value)
+  setup(k, f, a, d);
+}

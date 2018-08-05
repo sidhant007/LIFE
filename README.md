@@ -2,18 +2,19 @@
 
 - Designing and implementing a variant of genetic algorithm(NEAT, or Neuro-Evolution of Augmenting Topologies) for a life simulation involving a basic organism which ages and requires food
 - Problem Statement - To design a simulation in which agents are able to navigate in a 2d world so as to maximize their lifetime. Their lifetime is essentially defined by how much food they are able to eat while moving through the map and how many times can they avoid danger zones which drain their energy.
-  - Each agent is depicted by a yellow circle.
+  - Each agent is depicted by a small yellow circle.
   - Initally the energy level of each agent is 100 points each.
   - After every passing iteration they can move in their x and y axis by atmost +/- 10 px.
   - After each such iteration their enery reduces by 1 point. As their energy tends to 0, they tend to become transparent over time, for a better visual feedback, so that we are only concerned about the alive agents.
-  - On obtaining a food particle (depicted by green circle) their energy increased by +a amount.
-  - If they pass through a danger zone (depicted by red circle), their energy decreases by -b amount.
+  - On obtaining a food particle (depicted by small green circles) their energy increased by +a amount.
+  - If they pass through a danger zone (depicted by small red circles), they instantly die. So they need to avoid danger zones at all cost.
   - The aim of the agent is to try to life for the longest period of time possible. We consider one iteration as the smallest unit of time.
-  - Currently in the game there are "f" food particles, each of them provide "a" amount of energy. There are "d" danger zones, each of which drains "b" amount of energy. And finally there are "k" agents in each iteration.
+  - Currently in the game there are "f" food particles, each of them provide "a" amount of energy. There are "d" danger zones and finally there are "k" agents in each iteration.
 - Current method of solving -
   - Using a genetic algorithm, spawn k agents each with a unique randomly generate identity.
-  - This unique identiy of each agent is actually a neural network. It is a x layers neural network.
-  - It takes in the input as the current (x, y) coordinates of the agent, along with the distance to the nearest food particles and danger particles in each of the "rotated quadrants". So the first layer has 4(no. of rotated quadrants) * 2(food particle + danger particle) * 2(x coordinate + y coordinate) = 16 nodes.
+  - This unique identiy of each agent is actually a neural network. It is a 3 layers neural network. First layer has 11 nodes, next one has 6 nodes. Next one has 2 nodes.
+  - It takes in the input as the current (x, y) coordinates of the agent, along with the distance to the nearest food particles and danger particles in each of the "rotated quadrants". So the first layer has 4(no. of rotated quadrants) * 2(food particle + danger particle) + 2(x, y coordinates of itself) + 1(distance with its 3 iterations previous version) = 11 nodes
+  - In the 2 output nodes of the neural net, the first node gives us the change of upto (+/-) 10px in x axis and the second nodes give us the same thing for y axis.
   - "rotated quadrants" is defined as normal quadrants on a graph but rotated by 45 degrees in anti-clockwise direction.
   - Now each agents runs through the simulation and decides in which direction to go in each iteration using the decisions its neural network makes.
   - After this we assign a distribution to all the agents on the basis of their lifetime.
