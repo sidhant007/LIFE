@@ -1,6 +1,6 @@
 # LIFE
 
-Live demo can be seen [HERE] (https://cdn.rawgit.com/sidhant007/LIFE/4a9c85ea/index.html)
+## Live demo can be seen [HERE](https://cdn.rawgit.com/sidhant007/LIFE/4a9c85ea/index.html)
 
 - Designing and implementing a variant of genetic algorithm(NEAT, or Neuro-Evolution of Augmenting Topologies) for a life simulation involving a basic organism which ages and requires food
 - Problem Statement - To design a simulation in which agents are able to navigate in a 2d world so as to maximize their lifetime. Their lifetime is essentially defined by how much food they are able to eat while moving through the map and how many times can they avoid danger zones which drain their energy.
