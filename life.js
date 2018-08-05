@@ -1,6 +1,8 @@
 var width = 1000, height = 680;
 var max_power = 100;
 
+var avg = [], best = [];
+
 var mouse = {x:0, y:0, isMouseDown: false, id: -1}
 
 var dangers = [], foods = [], indis = [];
@@ -274,6 +276,9 @@ function get_best() {
   // document.getElementById("best_net").innerHTML = JSON.stringify(best_net, null, 2);
   document.getElementById("best_score").innerHTML = "Best score = " + bestFitness;
   document.getElementById("no_of_gen").innerHTML = "Current Generation No. = " + genNo;
+  avg.push(avgFitness);
+  best.push(bestFitness);
+  drawCurveTypes();
 }
 
 var setup = function(k, f, a, d) {
@@ -320,7 +325,7 @@ var setup = function(k, f, a, d) {
 }
 
 var genNo= 0;
-var best_net, bestFitness;
+var best_net, bestFitness, avgFitness;
 
 function evolve() {
   genNo++;
@@ -328,6 +333,7 @@ function evolve() {
   var prob = [];
   var prefix_prob = [];
   var totFitness = 0;
+  avgFitness = 0;
   bestFitness = 0;
   for(var i = 0; i < foods.length; i++) {
     foods[i].x = Math.random() * width;
@@ -335,12 +341,13 @@ function evolve() {
   }
   for(var i = 0; i < indis.length; i++) {
     totFitness += (indis[i].fitness * indis[i].fitness);
+    avgFitness += indis[i].fitness
     if(indis[i].fitness > bestFitness) {
       bestFitness = indis[i].fitness;
       best_net = indis[i].my_net;
     }
   }
-  console.log(bestFitness);
+  avgFitness /= indis.length
   for(var i = 0; i < indis.length; i++) {
     prob[i] = (indis[i].fitness * indis[i].fitness) / totFitness;
   }
@@ -477,4 +484,37 @@ function newLife() {
   var d = parseInt(document.getElementById('danger_no').value)
   document.getElementById("submit_btn").disabled = true
   setup(k, f, a, d);
+}
+
+google.charts.load('current', {packages: ['corechart', 'line']});
+// google.charts.setOnLoadCallback(drawCurveTypes);
+function drawCurveTypes() {
+  var data = new google.visualization.DataTable();
+  data.addColumn('number', 'X');
+  data.addColumn('number', 'Average Score');
+  data.addColumn('number', 'Best Score');
+
+  totData = []
+  for(var i = 0; i < genNo; i++) {
+    totData.push([i, avg[i], best[i]]);
+  }
+  data.addRows(totData);
+
+  var options = {
+    hAxis: {
+      title: 'Generation'
+    },
+    vAxis: {
+     title: 'Score'
+    },
+    series: {
+      1: {curveType: 'function'}
+    },
+    legend: {
+      position: 'bottom'
+    },
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
 }

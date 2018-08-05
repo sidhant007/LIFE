@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   </head>
   <body>
     <div id="canvas">
@@ -17,7 +18,7 @@
       <p> Visit <a href="https://github.com/sidhant007/LIFE/blob/master/README.md">README</a> for a detailed description of the project </p>
       <form onsubmit="newLife(); return false;">
         <label for="agent_no"> No. of agents in each iteration(k) = </label>
-        <input id="agent_no" type="number" min="0" max="40" value="20" required="true">
+        <input id="agent_no" type="number" min="1" max="40" value="20" required="true">
         <br>
         <label for="food_no"> No. of food particles(f) = </label>
         <input id="food_no" type="number" min="0" max="40" value="30" required="true">
@@ -37,6 +38,7 @@
       <input type="button" class="btn btn-outline-primary" value="FAST" onclick="fast();">
       <p id = "best_score"></p>
       <p id = "no_of_gen"></p>
+      <div id="chart_div"></div>
     </div>
     <script src = "life.js"></script>
   </body>
