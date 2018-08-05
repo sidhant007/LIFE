@@ -33,4 +33,5 @@
 
 ## Screenshots
 
-![screenshot1]()
+![screenshot1](https://github.com/sidhant007/LIFE/blob/master/screenshot1.png)
+![screenshot2](https://github.com/sidhant007/LIFE/blob/master/screenshot2.png)
