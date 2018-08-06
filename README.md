@@ -30,7 +30,7 @@
   - Can click on an agent to see the agents perspective of food items and the relevant information that the node knows (i.e distance to which food particles and danger zones in the respective 4 rotated quadrants).
   - Also note that an agent can eat a given food particle only once, so once consumed that food particle will be removed from the vision of that agent and that agen will NO LONGER be able to eat that food particle again.
   - There is a line graph being polotted real time to give the user the idea of how the genetic algorithm is improving over the generations. (Used Google Library to draw the line graph)
-- This project was done mainly after reading about genetic algorithms and neural networks through online courses and blogs. The simulation itslef works and the agents gradually improve their scores but I cannot mathematically reason out as to why it works due to insufficient theoretical knowledge about genetic algorithms.
+- This project was done mainly after reading about genetic algorithms and neural networks through online courses and blogs. The simulation itself works and the agents gradually improve their scores but I cannot mathematically reason out as to why it works due to insufficient theoretical knowledge about genetic algorithms.
 
 ## Screenshots
 
