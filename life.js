@@ -1,3 +1,4 @@
+// Main code
 var width = 1000, height = 680;
 var max_power = 100;
 
